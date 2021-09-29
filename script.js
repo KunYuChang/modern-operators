@@ -41,7 +41,7 @@ const game = {
   date: '2021/09/28',
   odds: {
     team1: 1.33,
-    x: 3.25,
+    x: 6.25,
     team2: 1.45,
   },
 }
@@ -69,3 +69,28 @@ const printGoals = function (...players) {
 // 7. 賠率越低的隊伍越有可能獲勝。 打印到控制台哪個團隊更有可能獲勝，而不使用 if/else 語句或三元運算符。
 team1 < team2 && console.log('中信兄弟獲勝機率高一點')
 team1 > team2 && console.log('統一7-ELEVEn獅獲勝機率高一點')
+
+// 8. 依順序打印出比賽得分的人員
+for (const [i, player] of game.scored.entries()) {
+  console.log(`本場第 ${i + 1}分 : ${player}`)
+}
+
+// 9. 計算遊戲的平均賠率
+const odds = Object.values(game.odds)
+let average = 0
+for (const odd of odds) average += odd
+average /= odds.length
+console.log(average)
+
+// 10. 打印出賠率
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? '平局' : game[team]
+  console.log(`${teamStr}的賠率是${odd}`)
+}
+
+// 11 統計球員得分
+const scorers = {}
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1)
+}
+console.log(scorers)
